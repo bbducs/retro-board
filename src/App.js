@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import List from './List'
+import { workItem, headers } from './const'
+import React, { useState } from 'react';
 
 function App() {
+  const [worklog, setworklog] = useState(workItem);
+  const updateCard = (newCard) => {
+    setworklog(prevState => (
+      [
+        ...prevState,
+        { ...newCard, id: workItem.length }
+      ]
+    ))
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {headers && headers.map((item, index) => {
+        let sortedWorklog = worklog && worklog.filter(log => item.id === 0 ? log.status === 'complete' : item.id === 1 ? log.status === 'pending' : log.status === 'todo')
+        return <List key={`list_${index}`} header={item} worklog={sortedWorklog} cardHandler={updateCard} />
+      })}
+
     </div>
   );
 }
