@@ -1,9 +1,38 @@
 .App {
   text-align: left;
   background-color: #fff;
-  min-height: 100vh;
   display: flex;
   justify-content: space-between;
   font-size: calc(10px + 2vmin);
   color: #000;
+}
+
+@media only screen and (max-width : 821px) {
+  .App {
+    max-width: 50% ;
+    text-align: left;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    font-size: calc(10px);
+    color: #000;
+    margin: 0 auto;
+
+  }
+
+}
+
+@media only screen and (max-width : 415px) {
+  .App {
+    max-width: 90% ;
+    text-align: left;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    font-size: calc(10px);
+    color: #000;
+    margin: 0 auto;
+
+  }
+
 }

@@ -9,7 +9,8 @@ const InputBox = (props) => {
     const action_item = useRef();
 
     const addNewTodo = () => {
-        cardHandler(transformObject(header));
+        const item = transformObject(header)
+        item.text && cardHandler(item);
         visibilityHandler()
     };
 
@@ -24,8 +25,11 @@ const InputBox = (props) => {
             <div className="Input">
                 <input type="text" id="input" className="Input-text" placeholder="Type something...." ref={action_item} />
             </div>
-            <button type="button" onClick={addNewTodo}> ok </button>
-            <button type="button" onClick={visibilityHandler}> Cancel </button>
+            <div className='btn-end'>
+                <button type="button" onClick={addNewTodo}> Add task </button>
+                <button type="button" onClick={visibilityHandler}> Undo </button>
+            </div>
+            
         </div>
     );
 }

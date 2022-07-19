@@ -14,11 +14,13 @@ function App() {
     ))
   }
 
+  const deleteCard = (id) => setworklog(worklog.filter(item => item.id !== id))
+
   return (
     <div className="App">
       {headers && headers.map((item, index) => {
         let sortedWorklog = worklog && worklog.filter(log => item.id === 0 ? log.status === 'complete' : item.id === 1 ? log.status === 'pending' : log.status === 'todo')
-        return <List key={`list_${index}`} header={item} worklog={sortedWorklog} cardHandler={updateCard} />
+        return <List key={`list_${index}`} header={item} worklog={sortedWorklog} cardHandler={updateCard} deleteCard={deleteCard}/>
       })}
 
     </div>
