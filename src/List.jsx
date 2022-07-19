@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./styles.css";
+import './List.css';
 import Card from "./Card";
 import InputBox from "./InputBox";
 
 
 const List = (props) => {
-  const { worklog, header, deleteCard } = props;
+
+  const updatedText = useRef();
+  const { worklog, header, deleteCard, updateCard, statusHandler } = props;
   const [visible, setvisible] = useState(false);
   const inputBoxVisibilityhandler = () => setvisible(!visible)
-  const deleteCardHandler = (item) => deleteCard(item.id)
+  const updateCardHandler = (data) => {
+    data.text = updatedText && updatedText.current.value;
+    updateCard(data)
+  }
 
   return (
     <div className="list">
@@ -19,10 +25,12 @@ const List = (props) => {
         let cssClass = `space_btw card_${header.id}`
         return (
           <Card key={index} className={cssClass}>
-            <div>{item.text}</div>
+            {item.state && (<div>{item.text}</div>)}
+            {!item.state && (<input type="text" placeholder="...." ref={updatedText} />)}
             <div>
-              <button className="delete-btn" type="button" onClick={() => deleteCardHandler(item)}>Edit</button>
-              <button className="delete-btn" type="button" onClick={() => deleteCardHandler(item)}>Delete</button>
+              <button className="delete-btn" type="button" onClick={() => statusHandler(item.id)}>Edit</button>
+              <button className="delete-btn" type="button" onClick={() => updateCardHandler(item)}>Update</button>
+              <button className="delete-btn" type="button" onClick={() => deleteCard(item.id)}>Delete</button>
             </div>
           </Card>
         )

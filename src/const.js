@@ -1,7 +1,7 @@
 export const workItem = [
-  { id: 0, text: "Developer new UI", status: "complete" },
-  { id: 1, text: "Unit test", status: "pending" },
-  { id: 2, text: "New item", status: "todo" },
+  { id: 0, text: "Developer new UI", status: "complete", state: true },
+  { id: 1, text: "Unit test", status: "pending", state: true },
+  { id: 2, text: "New item", status: "todo", state: true },
 ];
 
 export const headers = [
